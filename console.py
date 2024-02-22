@@ -77,7 +77,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
             return
 
-        # Split the arguments to extract class name and parameters
+
         args_list = args.split(' ')
         class_name = args_list[0]
         params = args_list[1:]
@@ -86,10 +86,10 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
             return
 
-        # Parse parameters
+
         obj_kwargs = {}
         for param in params:
-            # Split parameter into key and value
+
             key_value = param.split('=')
             if len(key_value) != 2:
                 print(f"Invalid parameter: {param}. Skipping...")
@@ -98,29 +98,26 @@ class HBNBCommand(cmd.Cmd):
             key = key_value[0]
             value = key_value[1]
 
-            # Handle different value types
+
             if value.startswith('"') and value.endswith('"'):
-                # String value
                 value = value[1:-1].replace('_', ' ').replace('\\"', '"')
             elif '.' in value:
-                # Float value
                 try:
                     value = float(value)
                 except ValueError:
                     print(f"Invalid float value: {value}. Skipping...")
                     continue
             else:
-                # Integer value
+
                 try:
                     value = int(value)
                 except ValueError:
                     print(f"Invalid integer value: {value}. Skipping...")
                     continue
 
-            # Add key-value pair to object kwargs
-            obj_kwargs[key] = value
 
-        # Create object instance
+        obj_kwargs[key] = value
+
         new_instance = self.classes[class_name](**obj_kwargs)
         new_instance.save()
         print(new_instance.id)
@@ -136,15 +133,15 @@ class HBNBCommand(cmd.Cmd):
         print("  all underscores _ must be replace by spaces")
         print("- Float: <unit>.<decimal> => contains a dot .")
         print("- Integer: <number> => default case")
-        print("If any parameter doesn’t fit with these requirements or can’t be recognized correctly by your program, it must be skipped")
-        print("Don’t forget to add tests for this new feature!")
+        print("If any parameter doesn't fit with these requirements or can't be recognized correctly by your program, it must be skipped")
+        print("Don't forget to add tests for this new feature!")
     
     def do_all(self, args):
         """Shows all objects, or all objects of a class"""
         print_list = []
 
         if args:
-            args = args.split(' ')[0]  # remove possible trailing args
+            args = args.split(' ')[0] 
             if args not in self.classes:
                 print("** class doesn't exist **")
                 return
